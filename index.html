@@ -3,235 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ashwin & Vathchala | Wedding Invitation</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Premium Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
-    <!-- Animation Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <title>Ashwin & Vathchala | Wedding Invite</title>
     
+    <!-- Scripts & Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@100;300;400&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --ivory: #FCF9F2;
-            --emerald: #1B3022;
-            --gold: #D4AF37;
-            --soft-pink: #F4E4E4;
+            --bg-cream: #FCF9F5;
+            --gold: #C5A059;
+            --groom-emerald: #1B4332;
+            --bride-rose: #9D5C63;
+            --sage: #708238;
         }
 
         body {
-            background-color: var(--ivory);
+            background-color: var(--bg-cream);
             font-family: 'Montserrat', sans-serif;
-            color: var(--emerald);
             overflow-x: hidden;
+            color: #333;
         }
 
-        .serif-header { font-family: 'Cinzel', serif; }
-        .serif-body { font-family: 'Cormorant Garamond', serif; }
+        .serif { font-family: 'Cormorant Garamond', serif; }
+        .playfair { font-family: 'Playfair Display', serif; }
 
-        /* Elegant Gold Gradient for text */
-        .gold-text {
-            background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        /* Ganesha Drawing Animation */
+        #ganesha-path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
         }
 
-        /* Subtle Lotus Background Pattern */
-        .lotus-pattern {
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5c-5 0-9 4-9 9 0 5 9 16 9 16s9-11 9-16c0-5-4-9-9-9z' fill='%23d4af37' fill-opacity='0.05'/%3E%3C/svg%3E");
+        /* Floating Petals Container */
+        #petals-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 10;
         }
 
-        .custom-border {
-            border: 2px solid var(--gold);
-            outline: 8px solid var(--ivory);
-            outline-offset: -10px;
+        .petal {
+            position: absolute;
+            background: #fbcfe8; /* Light Pink */
+            border-radius: 150% 0 150% 0;
+            opacity: 0.3;
+            filter: blur(1px);
         }
 
-        /* Floating Animation for Lotus */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+        .gold-gradient-bg {
+            background: linear-gradient(135deg, #fdfbf7 0%, #f5e6d3 100%);
         }
-        .animate-float { animation: float 4s ease-in-out infinite; }
 
-        .divider-line {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-            width: 100%;
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+        }
+
+        .reveal-text {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
         }
     </style>
 </head>
-<body class="lotus-pattern antialiased">
+<body class="antialiased">
 
-    <!-- Preloader/Blessing -->
-    <div class="flex flex-col items-center justify-center pt-12" data-aos="fade-down">
-        <!-- Lord Vinayaka SVG Line Art -->
-        <svg width="80" height="80" viewBox="0 0 100 100" class="mb-4">
-            <path d="M50 10 Q65 10 70 25 Q75 40 60 55 Q55 60 50 85 Q45 60 40 55 Q25 40 30 25 Q35 10 50 10" fill="none" stroke="#D4AF37" stroke-width="1.5"/>
-            <circle cx="50" cy="35" r="3" fill="#D4AF37"/>
-            <path d="M40 30 Q50 20 60 30" fill="none" stroke="#D4AF37" stroke-width="1"/>
-        </svg>
-        <p class="serif-header text-[10px] tracking-[0.5em] text-gold uppercase">Om Shri Ganeshaya Namah</p>
-    </div>
+    <!-- Floating Lotus Petals Background -->
+    <div id="petals-container"></div>
 
-    <!-- Hero Section -->
-    <section class="min-h-screen flex flex-col items-center justify-center text-center px-6 relative">
-        <!-- Floating Lotus Elements -->
-        <div class="absolute top-20 left-10 opacity-20 animate-float hidden md:block">
-            <svg width="100" height="100" viewBox="0 0 100 100" fill="#D4AF37">
-                <path d="M50 20C50 20 55 35 70 35C85 35 80 50 50 80C20 50 15 35 30 35C45 35 50 20 50 20Z"/>
-            </svg>
-        </div>
-        <div class="absolute bottom-20 right-10 opacity-20 animate-float hidden md:block" style="animation-delay: 2s;">
-            <svg width="80" height="80" viewBox="0 0 100 100" fill="#D4AF37">
-                <path d="M50 20C50 20 55 35 70 35C85 35 80 50 50 80C20 50 15 35 30 35C45 35 50 20 50 20Z"/>
+    <!-- 1. Ganesha & Intro Section -->
+    <section class="relative min-h-screen flex flex-col items-center justify-center py-20 px-6 overflow-hidden">
+        
+        <!-- Lord Vinayaga SVG (Self-Drawing Line Art) -->
+        <div class="mb-8 w-32 md:w-48 text-gold" id="vinayaga-box">
+            <svg viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path id="ganesha-path" d="M50 10C55 10 65 12 70 25C75 35 70 50 55 60C50 65 45 90 50 100C55 90 60 65 65 60C80 50 85 35 80 20C75 10 60 5 50 5C40 5 25 10 20 20C15 35 20 50 35 60C40 65 45 90 50 100" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="50" cy="35" r="2" fill="currentColor"/>
+                <path d="M40 30Q50 20 60 30" stroke="currentColor" stroke-width="1"/>
+                <path d="M30 45Q15 45 15 65Q15 85 35 85" stroke="currentColor" stroke-width="1.2"/>
+                <path d="M70 45Q85 45 85 65Q85 85 65 85" stroke="currentColor" stroke-width="1.2"/>
             </svg>
         </div>
 
-        <div data-aos="zoom-out" data-aos-duration="2000" class="z-10">
-            <h4 class="serif-header text-sm tracking-[0.4em] mb-8 text-emerald opacity-80">The Union of Two Souls</h4>
-            <h1 class="serif-body text-5xl md:text-8xl mb-4 font-light">Ashwin <span class="text-gold">&</span> Vathchala</h1>
-            <div class="flex items-center justify-center gap-4 my-6">
-                <div class="h-[1px] w-12 bg-gold/50"></div>
-                <svg width="30" height="30" viewBox="0 0 100 100" fill="#D4AF37"><path d="M50 20 L60 45 L85 50 L60 55 L50 80 L40 55 L15 50 L40 45 Z"/></svg>
-                <div class="h-[1px] w-12 bg-gold/50"></div>
+        <p class="serif text-xs tracking-[0.6em] uppercase mb-12 text-sage opacity-0 translate-y-10 reveal-item">Om Shri Ganeshaya Namah</p>
+
+        <!-- Names Section -->
+        <div class="text-center z-20">
+            <h1 class="serif text-5xl md:text-8xl mb-4 font-light opacity-0 translate-y-10 reveal-item" style="color: var(--groom-emerald);">
+                Ashwin S Madhav
+            </h1>
+            <div class="flex items-center justify-center gap-6 my-8 opacity-0 reveal-item">
+                <div class="h-[1px] w-12 bg-gold/40"></div>
+                <span class="playfair italic text-3xl text-gold">with</span>
+                <div class="h-[1px] w-12 bg-gold/40"></div>
             </div>
-            <p class="serif-body text-2xl md:text-3xl italic mb-10">July 12th, 2026</p>
+            <h1 class="serif text-5xl md:text-8xl mb-8 font-light opacity-0 translate-y-10 reveal-item" style="color: var(--bride-rose);">
+                Vathchala Surendiran
+            </h1>
         </div>
 
-        <!-- Countdown -->
-        <div id="countdown" class="grid grid-cols-4 gap-6 md:gap-12 py-8 px-10 border-t border-b border-gold/20" data-aos="fade-up">
-            <div class="text-center">
-                <span id="days" class="serif-body text-3xl md:text-4xl block font-light">00</span>
-                <p class="text-[9px] uppercase tracking-widest mt-1">Days</p>
+        <!-- Lotus Icon -->
+        <div class="mt-12 opacity-0 reveal-item scale-50">
+            <svg width="60" height="60" viewBox="0 0 100 100" fill="#fbcfe8" class="animate-pulse">
+                <path d="M50 20C50 20 55 40 85 50C55 60 50 90 50 90C50 90 45 60 15 50C45 40 50 20 50 20Z"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- 2. Lineage Section -->
+    <section class="py-24 px-6 bg-white/30">
+        <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-16 text-center">
+            <div class="scroll-reveal">
+                <p class="text-[10px] tracking-[0.4em] uppercase text-gold mb-4">The Groom's Parents</p>
+                <h3 class="serif text-2xl">Mrs. Sujatha <br>& Mr. Sethu Madhavan</h3>
             </div>
-            <div class="text-center">
-                <span id="hours" class="serif-body text-3xl md:text-4xl block font-light">00</span>
-                <p class="text-[9px] uppercase tracking-widest mt-1">Hrs</p>
-            </div>
-            <div class="text-center">
-                <span id="minutes" class="serif-body text-3xl md:text-4xl block font-light">00</span>
-                <p class="text-[9px] uppercase tracking-widest mt-1">Min</p>
-            </div>
-            <div class="text-center">
-                <span id="seconds" class="serif-body text-3xl md:text-4xl block font-light">00</span>
-                <p class="text-[9px] uppercase tracking-widest mt-1">Sec</p>
+            <div class="scroll-reveal">
+                <p class="text-[10px] tracking-[0.4em] uppercase text-gold mb-4">The Bride's Parents</p>
+                <h3 class="serif text-2xl">Mrs. Sivagama sundari <br>& Mr. Surendhiran</h3>
             </div>
         </div>
     </section>
 
-    <!-- Invitation & Lineage -->
-    <section class="max-w-5xl mx-auto px-6 py-20">
-        <div class="bg-white/50 backdrop-blur-sm p-8 md:p-16 rounded-sm border border-gold/10 relative overflow-hidden">
-            <!-- Decorative Corner Lotus -->
-            <div class="absolute -top-10 -right-10 opacity-10 rotate-45">
-                <svg width="200" height="200" viewBox="0 0 100 100" fill="#D4AF37"><path d="M50 10C50 10 55 40 90 50C55 60 50 90 50 90C50 90 45 60 10 50C45 40 50 10 50 10Z"/></svg>
+    <!-- 3. Details Card -->
+    <section class="py-20 px-6 gold-gradient-bg">
+        <div class="max-w-5xl mx-auto glass-card rounded-3xl p-8 md:p-20 shadow-2xl relative overflow-hidden">
+            <!-- Background Lotus Detail -->
+            <div class="absolute -bottom-20 -right-20 opacity-5 w-80 h-80">
+                <svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 0 C70 40 100 50 50 100 C0 50 30 40 50 0"/></svg>
             </div>
 
-            <div class="text-center" data-aos="fade-up">
-                <p class="serif-body text-xl md:text-2xl mb-12 italic leading-relaxed">
-                    With the divine blessings of Lord Ganesha, we cordially invite you to the auspicious wedding ceremony of our children.
-                </p>
-
-                <div class="grid md:grid-cols-2 gap-16 relative">
-                    <div class="space-y-4">
-                        <h2 class="serif-header text-2xl gold-text">Ashwin S Madhav</h2>
-                        <div class="divider-line mx-auto w-24 mb-4"></div>
-                        <p class="text-xs tracking-widest text-emerald/60 uppercase">Son of</p>
-                        <p class="serif-body text-xl">Mrs. Sujatha & Mr. Sethu Madhavan</p>
-                    </div>
-
-                    <div class="space-y-4">
-                        <h2 class="serif-header text-2xl gold-text">Vathchala Surendiran</h2>
-                        <div class="divider-line mx-auto w-24 mb-4"></div>
-                        <p class="text-xs tracking-widest text-emerald/60 uppercase">Daughter of</p>
-                        <p class="serif-body text-xl">Mrs. Sivagama sundari & Mr. Surendhiran</p>
-                    </div>
+            <div class="grid md:grid-cols-2 gap-12 relative z-10">
+                <div class="text-center md:text-left md:border-r border-gold/20 pr-8">
+                    <h2 class="serif text-4xl mb-6 text-sage italic">The Muhurtham</h2>
+                    <p class="text-3xl serif mb-2">10:30 AM – 11:00 AM</p>
+                    <p class="tracking-[0.2em] text-sm uppercase font-light">Sunday, July 12th, 2026</p>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Ceremony Details -->
-    <section class="py-20 px-6 bg-[#1B3022] text-[#FCF9F2]">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-16" data-aos="fade-down">
-                <h2 class="serif-header text-3xl mb-4 gold-text">Ceremony Details</h2>
-                <div class="h-1 w-20 bg-gold mx-auto"></div>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- Muhurtham Box -->
-                <div class="border border-gold/30 p-10 text-center hover:bg-white/5 transition-colors" data-aos="fade-right">
-                    <div class="mb-6">
-                        <svg width="40" height="40" viewBox="0 0 24 24" class="mx-auto" fill="none" stroke="#D4AF37" stroke-width="1.5">
-                            <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
-                        </svg>
-                    </div>
-                    <h3 class="serif-header text-xl mb-4">The Muhurtham</h3>
-                    <p class="serif-body text-2xl text-gold mb-2">10:30 AM – 11:00 AM</p>
-                    <p class="font-light text-sm">Sunday, 12th July 2026</p>
-                </div>
-
-                <!-- Venue Box -->
-                <div class="border border-gold/30 p-10 text-center hover:bg-white/5 transition-colors" data-aos="fade-left">
-                    <div class="mb-6">
-                        <svg width="40" height="40" viewBox="0 0 24 24" class="mx-auto" fill="none" stroke="#D4AF37" stroke-width="1.5">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
-                        </svg>
-                    </div>
-                    <h3 class="serif-header text-xl mb-4">The Venue</h3>
-                    <p class="text-sm font-light leading-relaxed mb-6">
+                
+                <div class="text-center md:text-left">
+                    <h2 class="serif text-4xl mb-6 text-sage italic">The Venue</h2>
+                    <p class="serif text-xl mb-6 leading-relaxed">
                         Sri Lakshmi Balaji Thirumana Mandapam,<br>
-                        Madukkarai, Coimbatore - 641105
+                        Madukkarai, Coimbatore.
                     </p>
-                    <a href="https://maps.google.com" target="_blank" class="inline-block px-6 py-2 border border-gold text-gold text-[10px] tracking-[0.3em] uppercase hover:bg-gold hover:text-emerald transition-all">
-                        Navigate to Venue
+                    <a href="https://www.google.com/maps" target="_blank" class="inline-block border border-gold px-10 py-3 text-[10px] uppercase tracking-[0.3em] text-gold hover:bg-gold hover:text-white transition-all duration-500">
+                        View Location
                     </a>
                 </div>
             </div>
+
+            <!-- Countdown -->
+            <div id="countdown" class="mt-20 grid grid-cols-4 gap-4 border-t border-gold/10 pt-12">
+                <div class="text-center"><span id="days" class="serif text-3xl block">00</span><p class="text-[9px] uppercase tracking-widest mt-2">Days</p></div>
+                <div class="text-center"><span id="hours" class="serif text-3xl block">00</span><p class="text-[9px] uppercase tracking-widest mt-2">Hours</p></div>
+                <div class="text-center"><span id="minutes" class="serif text-3xl block">00</span><p class="text-[9px] uppercase tracking-widest mt-2">Mins</p></div>
+                <div class="text-center"><span id="seconds" class="serif text-3xl block">00</span><p class="text-[9px] uppercase tracking-widest mt-2">Secs</p></div>
+            </div>
         </div>
     </section>
 
-    <!-- Footer Footer -->
-    <footer class="py-24 text-center px-6">
-        <div data-aos="zoom-in">
-            <!-- Lotus SVG -->
-            <svg width="60" height="40" viewBox="0 0 100 60" class="mx-auto mb-8">
-                <path d="M50 10 Q60 30 90 30 Q60 35 50 55 Q40 35 10 30 Q40 30 50 10" fill="#D4AF37" opacity="0.6"/>
-            </svg>
-            <h2 class="serif-header text-2xl tracking-widest mb-4">#AshwinWedsVathchala</h2>
-            <p class="serif-body text-lg italic text-emerald/70">Your presence is our most beautiful gift.</p>
-            <div class="mt-20 opacity-30 text-[9px] tracking-[0.5em] uppercase">
-                Created with Love for July 2026
-            </div>
-        </div>
+    <!-- 4. Footer -->
+    <footer class="py-32 text-center">
+        <h2 class="playfair text-3xl italic gold-text mb-4">#AshwinWedsVathchala</h2>
+        <p class="serif text-lg opacity-60">We eagerly wait for your presence.</p>
     </footer>
 
     <script>
-        AOS.init({ duration: 1200, once: true });
+        // 1. Ganesha Draw-In Animation
+        window.addEventListener('load', () => {
+            gsap.to("#ganesha-path", {
+                strokeDashoffset: 0,
+                duration: 3,
+                ease: "power2.inOut"
+            });
 
-        // Countdown Script
-        const targetDate = new Date("July 12, 2026 10:30:00").getTime();
-        const updateCountdown = setInterval(function() {
+            gsap.to(".reveal-item", {
+                opacity: 1,
+                y: 0,
+                stagger: 0.3,
+                duration: 1.5,
+                ease: "power3.out",
+                delay: 1
+            });
+        });
+
+        // 2. Scroll Reveal Animations
+        gsap.registerPlugin(ScrollTrigger);
+        
+        gsap.utils.toArray(".scroll-reveal").forEach(elem => {
+            gsap.from(elem, {
+                scrollTrigger: elem,
+                y: 50,
+                opacity: 0,
+                duration: 1.2,
+                ease: "power3.out"
+            });
+        });
+
+        // 3. 2D Lotus Petal Particle System
+        const petalContainer = document.getElementById('petals-container');
+        const petalCount = 15;
+
+        for (let i = 0; i < petalCount; i++) {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            const size = Math.random() * 15 + 10 + 'px';
+            petal.style.width = size;
+            petal.style.height = size;
+            petal.style.left = Math.random() * 100 + 'vw';
+            petalContainer.appendChild(petal);
+
+            gsap.set(petal, { y: -50, rotate: Math.random() * 360 });
+
+            gsap.to(petal, {
+                y: '110vh',
+                x: '+=100',
+                rotate: 720,
+                duration: Math.random() * 10 + 10,
+                repeat: -1,
+                ease: "none",
+                delay: Math.random() * 10
+            });
+        }
+
+        // 4. Countdown Timer
+        const target = new Date("July 12, 2026 10:30:00").getTime();
+        setInterval(() => {
             const now = new Date().getTime();
-            const diff = targetDate - now;
-
-            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((diff % (1000 * 60)) / 1000);
-
-            document.getElementById("days").innerText = d < 10 ? '0'+d : d;
-            document.getElementById("hours").innerText = h < 10 ? '0'+h : h;
-            document.getElementById("minutes").innerText = m < 10 ? '0'+m : m;
-            document.getElementById("seconds").innerText = s < 10 ? '0'+s : s;
-
-            if (diff < 0) {
-                clearInterval(updateCountdown);
-                document.getElementById("countdown").innerHTML = "<p class='serif-body text-2xl'>Today is the Big Day!</p>";
-            }
+            const diff = target - now;
+            document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById("seconds").innerText = Math.floor((diff % (1000 * 60)) / 1000);
         }, 1000);
     </script>
 </body>
