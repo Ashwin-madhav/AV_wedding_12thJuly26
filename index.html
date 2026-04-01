@@ -3,583 +3,362 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ashwin & Vathchala — Wedding Invitation</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<title>Ashwin & Vathchala Wedding</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --gold: #b8965a;
-    --gold-light: #d4af7a;
-    --gold-pale: #f0e0c0;
-    --cream: #faf6f0;
-    --deep: #1a1208;
-    --text: #3a2c18;
-    --muted: #7a6548;
+    --royal-maroon: #800000;
+    --silk-gold: #d4af37;
+    --mango-yellow: #ff8c00;
+    --deep-teal: #004d4d;
+    --cream: #fffdf5;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background: #e8dcc8;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'EB Garamond', serif;
-    padding: 40px 20px;
+    background-color: var(--cream);
+    background-image: url("https://www.transparenttextures.com/patterns/silk-weave.png");
+    color: #333;
+    font-family: 'Playfair Display', serif;
     overflow-x: hidden;
-    background-image:
-      radial-gradient(ellipse at 20% 20%, rgba(184,150,90,0.15) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 80%, rgba(184,150,90,0.12) 0%, transparent 50%);
   }
 
-  #petal-canvas {
+  canvas {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
     pointer-events: none;
+    z-index: 100;
+  }
+
+  /* --- CREATIVE 2D MOTION: HANGING BELLS --- */
+  .toran {
+    position: fixed;
+    top: -10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    z-index: 50;
+    pointer-events: none;
+  }
+
+  .bell {
+    width: 2px;
+    height: 80px;
+    background: var(--silk-gold);
+    position: relative;
+    transform-origin: top;
+    animation: sway 3s ease-in-out infinite;
+    pointer-events: auto;
+  }
+
+  .bell::after {
+    content: '🔔';
+    position: absolute;
+    bottom: -15px;
+    left: -10px;
+    font-size: 20px;
+    filter: sepia(1) saturate(5) hue-rotate(10deg);
+  }
+
+  @keyframes sway {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+  }
+
+  /* --- MAIN CARD --- */
+  .container {
+    max-width: 600px;
+    margin: 60px auto;
+    background: white;
+    position: relative;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+    border: 15px solid transparent;
+    border-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png") 30 stretch;
+    overflow: hidden;
+  }
+
+  .card-border {
+    position: absolute;
+    inset: 10px;
+    border: 2px solid var(--silk-gold);
+    pointer-events: none;
+  }
+
+  .header {
+    background: var(--royal-maroon);
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--silk-gold);
+    position: relative;
+  }
+
+  .ganesha {
+    width: 80px;
+    filter: drop-shadow(0 0 10px var(--mango-yellow));
+    margin-bottom: 10px;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+  }
+
+  /* --- NAMES SECTION --- */
+  .content {
+    padding: 40px 30px;
+    text-align: center;
+    background: radial-gradient(circle at center, #ffffff 0%, #fffdf5 100%);
+  }
+
+  .mandala-bg {
+    position: absolute;
+    width: 300px;
+    opacity: 0.05;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation: rotate 60s linear infinite;
     z-index: 0;
   }
 
-  .envelope-wrap {
+  .invite-text {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--royal-maroon);
+    margin-bottom: 20px;
+  }
+
+  .couple-names {
+    font-family: 'Great Vibes', cursive;
+    font-size: 4rem;
+    color: var(--royal-maroon);
+    margin: 20px 0;
     position: relative;
     z-index: 1;
-    opacity: 0;
-    animation: cardReveal 1.4s cubic-bezier(0.22,1,0.36,1) 0.3s forwards;
-  }
-  @keyframes cardReveal {
-    from { opacity: 0; transform: translateY(60px) scale(0.96); }
-    to   { opacity: 1; transform: translateY(0)   scale(1); }
+    text-shadow: 2px 2px 0px rgba(212, 175, 55, 0.2);
   }
 
-  .card {
-    background: var(--cream);
-    width: min(600px, 100%);
-    position: relative;
-    overflow: hidden;
-    box-shadow:
-      0 0 0 1px rgba(184,150,90,0.3),
-      0 4px 6px rgba(0,0,0,0.05),
-      0 20px 60px rgba(0,0,0,0.18),
-      0 40px 100px rgba(0,0,0,0.1);
-  }
-  .card::before {
-    content: '';
-    position: absolute; inset: 12px;
-    border: 1px solid rgba(184,150,90,0.4);
-    pointer-events: none; z-index: 10;
-  }
-  .card::after {
-    content: '';
-    position: absolute; inset: 16px;
-    border: 0.5px solid rgba(184,150,90,0.2);
-    pointer-events: none; z-index: 10;
-  }
-
-  /* Gold shimmer sweep */
-  .shimmer-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(110deg,
-      transparent 30%,
-      rgba(255,255,255,0.18) 50%,
-      transparent 70%);
-    background-size: 200% 100%;
-    animation: shimmer 4s ease-in-out 1.8s infinite;
-    pointer-events: none; z-index: 9;
-  }
-  @keyframes shimmer {
-    0%   { background-position: -100% 0; }
-    40%  { background-position: 200% 0; }
-    100% { background-position: 200% 0; }
-  }
-
-  /* TOP BANNER */
-  .top-banner {
-    background: var(--deep);
-    padding: 28px 40px 22px;
-    text-align: center;
-    position: relative; overflow: hidden;
-  }
-  .top-banner::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: repeating-linear-gradient(
-      90deg,
-      rgba(184,150,90,0.08) 0px, rgba(184,150,90,0.08) 1px,
-      transparent 1px, transparent 40px
-    );
-  }
-
-  .mandala-ring {
-    width: 60px; height: 60px;
-    margin: 0 auto 6px;
-    position: relative;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .mandala-ring svg {
-    position: absolute; inset: 0;
-    animation: spinSlow 20s linear infinite;
-  }
-  .mandala-ring svg.counter {
-    animation: spinSlow 28s linear infinite reverse;
-    opacity: 0.5;
-  }
-  @keyframes spinSlow { to { transform: rotate(360deg); } }
-
-  .om-symbol {
-    font-size: 26px; color: var(--gold);
-    position: relative; z-index: 2;
-    animation: glow 3s ease-in-out infinite alternate;
-  }
-  @keyframes glow {
-    from { text-shadow: 0 0 8px rgba(184,150,90,0.4); }
-    to   { text-shadow: 0 0 24px rgba(184,150,90,1), 0 0 48px rgba(184,150,90,0.4); }
-  }
-
-  .blessing-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    color: var(--gold-pale);
-    font-size: 13px; letter-spacing: 2px;
-    opacity: 0;
-    animation: fadeIn 1s ease 1.4s forwards;
-  }
-  @keyframes fadeIn { to { opacity: 0.85; } }
-
-  /* DIVIDER */
-  .divider {
-    display: flex; align-items: center; gap: 12px;
-    padding: 0 40px; margin: 20px 0;
-  }
-  .divider-line {
-    flex: 1; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  }
-  .divider-ornament { color: var(--gold); font-size: 18px; line-height: 1; }
-
-  /* MAIN CONTENT */
-  .main-content { padding: 10px 50px 40px; text-align: center; }
-
-  .anim { opacity: 0; transform: translateY(24px); }
-
-  .invite-pretext {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic; color: var(--muted);
-    font-size: 15px; letter-spacing: 1px; margin-bottom: 8px;
-  }
-
-  .names {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 300; color: var(--deep);
-    font-size: clamp(48px, 10vw, 72px);
-    line-height: 1.05; letter-spacing: -1px;
-  }
-  .names .ampersand {
-    color: var(--gold); font-style: italic;
-    font-size: 0.85em; display: block; margin: -6px 0;
-  }
-  .name-letter {
-    display: inline-block;
-    opacity: 0; transform: translateY(20px);
-  }
-
-  .wedding-title {
+  .and {
     font-family: 'Cinzel', serif;
-    font-size: 11px; letter-spacing: 5px;
-    color: var(--gold); text-transform: uppercase; margin-top: 4px;
+    font-size: 1.5rem;
+    display: block;
+    color: var(--mango-yellow);
   }
 
-  /* Animated lotus divider */
-  .lotus-divider {
-    margin: 20px auto;
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-  }
-  .lotus-line {
-    flex: 1; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold));
-    max-width: 120px;
-    transform: scaleX(0); transform-origin: right;
-    transition: transform 0.9s cubic-bezier(0.22,1,0.36,1);
-  }
-  .lotus-line.right {
-    background: linear-gradient(90deg, var(--gold), transparent);
-    transform-origin: left;
-  }
-  .lotus-line.open { transform: scaleX(1); }
-
-  .lotus-svg { animation: floatPulse 4s ease-in-out infinite; }
-  @keyframes floatPulse {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50%       { transform: translateY(-4px) scale(1.06); }
+  /* --- INFO BOX --- */
+  .info-grid {
+    background: var(--royal-maroon);
+    color: white;
+    padding: 30px;
+    margin: 30px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    border-radius: 50px 0 50px 0;
   }
 
-  .invite-body {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic; color: var(--muted);
-    font-size: 16px; line-height: 1.8; margin-bottom: 28px;
+  .info-item h4 {
+    font-family: 'Cinzel';
+    color: var(--silk-gold);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
   }
 
-  .heart {
-    display: inline-block;
-    color: #c0524a; font-size: 14px;
-    animation: heartbeat 1.4s ease-in-out infinite;
-  }
-  @keyframes heartbeat {
-    0%, 100% { transform: scale(1); }
-    15%       { transform: scale(1.35); }
-    30%       { transform: scale(1); }
-    45%       { transform: scale(1.2); }
-    60%       { transform: scale(1); }
+  .info-item p {
+    font-size: 1.2rem;
   }
 
-  /* DETAILS BLOCK */
-  .details-block {
-    background: var(--deep);
-    margin: 0 -50px; padding: 32px 50px;
-    position: relative;
-  }
-  .details-block::before {
-    content: ''; position: absolute;
-    top: 0; left: 0; right: 0; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  }
-  .details-block::after {
-    content: ''; position: absolute;
-    bottom: 0; left: 0; right: 0; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  /* --- CREATIVE INTERACTION --- */
+  .bless-btn {
+    background: var(--mango-yellow);
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    font-family: 'Cinzel';
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(255, 140, 0, 0.4);
+    margin-top: 20px;
   }
 
-  .detail-row {
-    display: flex; align-items: flex-start; gap: 16px;
-    margin-bottom: 20px; text-align: left;
-    opacity: 0; transform: translateX(-20px);
-  }
-  .detail-row:last-child { margin-bottom: 0; }
-
-  .detail-icon {
-    color: var(--gold); font-size: 20px;
-    flex-shrink: 0; margin-top: 2px;
-    width: 24px; text-align: center;
-  }
-  .flame-icon { animation: flicker 1.8s ease-in-out infinite alternate; }
-  @keyframes flicker {
-    0%   { transform: scaleY(1)    rotate(-1deg);  opacity: 1; }
-    30%  { transform: scaleY(1.08) rotate(1deg);   opacity: 0.85; }
-    60%  { transform: scaleY(0.95) rotate(-2deg);  opacity: 1; }
-    100% { transform: scaleY(1.05) rotate(1.5deg); opacity: 0.9; }
+  .bless-btn:hover {
+    transform: scale(1.1) rotate(-2deg);
+    background: var(--royal-maroon);
   }
 
-  .detail-label {
-    font-family: 'Cinzel', serif; font-size: 9px;
-    letter-spacing: 3px; color: var(--gold);
-    text-transform: uppercase; display: block; margin-bottom: 3px;
-  }
-  .detail-value {
-    font-family: 'Cormorant Garamond', serif;
-    color: var(--gold-pale); font-size: 18px; font-weight: 300; line-height: 1.3;
-  }
-  .detail-value small {
-    font-size: 14px; opacity: 0.75; font-style: italic;
-    display: block; margin-top: 2px;
+  .venue-details {
+    margin-top: 30px;
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.6;
   }
 
-  /* RSVP */
-  .rsvp-section { padding: 28px 0 10px; }
-  .rsvp-label {
-    font-family: 'Cinzel', serif; font-size: 10px;
-    letter-spacing: 4px; color: var(--gold);
-    text-transform: uppercase; margin-bottom: 8px;
-  }
-  .rsvp-contact {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px; color: var(--text); font-weight: 400;
-  }
-  .rsvp-note {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic; color: var(--muted); font-size: 13.5px; margin-top: 6px;
+  .footer-art {
+    width: 100%;
+    height: 60px;
+    background: url('https://www.transparenttextures.com/patterns/binding-light.png');
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--silk-gold);
+    font-size: 20px;
   }
 
-  /* BOTTOM */
-  .bottom-ornament {
-    background: var(--deep); padding: 18px 40px; text-align: center;
-  }
-  .bottom-ornament span { color: var(--gold); font-size: 22px; letter-spacing: 12px; }
+  @keyframes rotate { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
 
-  /* CORNERS */
-  .corner { position: absolute; width: 50px; height: 50px; z-index: 11; }
-  .corner svg { width: 100%; height: 100%; }
-  .corner-tl { top: 22px; left: 22px; }
-  .corner-tr { top: 22px; right: 22px; transform: scaleX(-1); }
-  .corner-bl { bottom: 22px; left: 22px; transform: scaleY(-1); }
-  .corner-br { bottom: 22px; right: 22px; transform: scale(-1); }
-
-  .corner-path {
-    stroke-dasharray: 80; stroke-dashoffset: 80;
-    animation: drawCorner 1s ease 0.8s forwards;
-  }
-  @keyframes drawCorner { to { stroke-dashoffset: 0; } }
-  .corner-curve {
-    stroke-dasharray: 30; stroke-dashoffset: 30;
-    animation: drawCorner 1.2s ease 1.2s forwards;
-  }
-  .corner-dot {
-    opacity: 0;
-    animation: fadeIn 0.3s ease 1.8s forwards;
+  @media (max-width: 600px) {
+    .container { margin: 20px; }
+    .couple-names { font-size: 3rem; }
   }
 </style>
 </head>
 <body>
 
-<canvas id="petal-canvas"></canvas>
+<canvas id="flowerCanvas"></canvas>
 
-<div class="envelope-wrap">
-  <div class="card">
-    <div class="shimmer-overlay"></div>
+<div class="toran">
+  <div class="bell" style="animation-delay: 0.1s"></div>
+  <div class="bell" style="animation-delay: 0.5s"></div>
+  <div class="bell" style="animation-delay: 0.3s"></div>
+  <div class="bell" style="animation-delay: 0.7s"></div>
+  <div class="bell" style="animation-delay: 0.2s"></div>
+</div>
 
-    <!-- Corners -->
-    <div class="corner corner-tl">
-      <svg viewBox="0 0 50 50" fill="none">
-        <path class="corner-path" d="M2 2 L2 20 M2 2 L20 2" stroke="#b8965a" stroke-width="1.5"/>
-        <path class="corner-curve" d="M2 2 Q 15 8, 25 25" stroke="#b8965a" stroke-width="0.5" opacity="0.4"/>
-        <circle class="corner-dot" cx="2" cy="2" r="2" fill="#b8965a"/>
-      </svg>
-    </div>
-    <div class="corner corner-tr">
-      <svg viewBox="0 0 50 50" fill="none">
-        <path class="corner-path" d="M2 2 L2 20 M2 2 L20 2" stroke="#b8965a" stroke-width="1.5"/>
-        <path class="corner-curve" d="M2 2 Q 15 8, 25 25" stroke="#b8965a" stroke-width="0.5" opacity="0.4"/>
-        <circle class="corner-dot" cx="2" cy="2" r="2" fill="#b8965a"/>
-      </svg>
-    </div>
-    <div class="corner corner-bl">
-      <svg viewBox="0 0 50 50" fill="none">
-        <path class="corner-path" d="M2 2 L2 20 M2 2 L20 2" stroke="#b8965a" stroke-width="1.5"/>
-        <path class="corner-curve" d="M2 2 Q 15 8, 25 25" stroke="#b8965a" stroke-width="0.5" opacity="0.4"/>
-        <circle class="corner-dot" cx="2" cy="2" r="2" fill="#b8965a"/>
-      </svg>
-    </div>
-    <div class="corner corner-br">
-      <svg viewBox="0 0 50 50" fill="none">
-        <path class="corner-path" d="M2 2 L2 20 M2 2 L20 2" stroke="#b8965a" stroke-width="1.5"/>
-        <path class="corner-curve" d="M2 2 Q 15 8, 25 25" stroke="#b8965a" stroke-width="0.5" opacity="0.4"/>
-        <circle class="corner-dot" cx="2" cy="2" r="2" fill="#b8965a"/>
-      </svg>
-    </div>
+<div class="container">
+  <div class="card-border"></div>
+  
+  <div class="header">
+    <img src="https://cdn-icons-png.flaticon.com/512/2357/2357303.png" class="ganesha" alt="Ganesha">
+    <p style="letter-spacing: 4px; font-size: 0.7rem; text-transform: uppercase;">Sree Vinayagar Sahayam</p>
+  </div>
 
-    <!-- Top banner -->
-    <div class="top-banner">
-      <div class="mandala-ring">
-        <svg viewBox="0 0 60 60" fill="none">
-          <circle cx="30" cy="30" r="28" stroke="#b8965a" stroke-width="0.5" stroke-dasharray="4 3" opacity="0.6"/>
-          <circle cx="30" cy="30" r="24" stroke="#b8965a" stroke-width="0.3" opacity="0.3"/>
-          <ellipse cx="30" cy="4"  rx="2" ry="4" fill="#b8965a" opacity="0.4"/>
-          <ellipse cx="30" cy="4"  rx="2" ry="4" fill="#b8965a" opacity="0.4" transform="rotate(45 30 30)"/>
-          <ellipse cx="30" cy="4"  rx="2" ry="4" fill="#b8965a" opacity="0.4" transform="rotate(90 30 30)"/>
-          <ellipse cx="30" cy="4"  rx="2" ry="4" fill="#b8965a" opacity="0.4" transform="rotate(135 30 30)"/>
-          <ellipse cx="30" cy="4"  rx="2" ry="4" fill="#b8965a" opacity="0.4" transform="rotate(180 30 30)"/>
-          <ellipse cx="30" cy="4"  rx="2" ry="4" fill="#b8965a" opacity="0.4" transform="rotate(225 30 30)"/>
-          <ellipse cx="30" cy="4"  rx="2" ry="4" fill="#b8965a" opacity="0.4" transform="rotate(270 30 30)"/>
-          <ellipse cx="30" cy="4"  rx="2" ry="4" fill="#b8965a" opacity="0.4" transform="rotate(315 30 30)"/>
-        </svg>
-        <svg class="counter" viewBox="0 0 60 60" fill="none">
-          <circle cx="30" cy="30" r="19" stroke="#b8965a" stroke-width="0.5" stroke-dasharray="2 4" opacity="0.4"/>
-          <circle cx="30" cy="11" r="1.5" fill="#b8965a" opacity="0.6"/>
-          <circle cx="30" cy="11" r="1.5" fill="#b8965a" opacity="0.6" transform="rotate(60 30 30)"/>
-          <circle cx="30" cy="11" r="1.5" fill="#b8965a" opacity="0.6" transform="rotate(120 30 30)"/>
-          <circle cx="30" cy="11" r="1.5" fill="#b8965a" opacity="0.6" transform="rotate(180 30 30)"/>
-          <circle cx="30" cy="11" r="1.5" fill="#b8965a" opacity="0.6" transform="rotate(240 30 30)"/>
-          <circle cx="30" cy="11" r="1.5" fill="#b8965a" opacity="0.6" transform="rotate(300 30 30)"/>
-        </svg>
-        <span class="om-symbol">ॐ</span>
+  <div class="content">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Mandala_10.svg/1024px-Mandala_10.svg.png" class="mandala-bg">
+    
+    <p class="invite-text">With the blessings of grandparents & families, we cordially invite you to the wedding of</p>
+    
+    <h1 class="couple-names">
+      Ashwin .S
+      <span class="and">Weds</span>
+      Vathchala .S
+    </h1>
+
+    <div class="info-grid">
+      <div class="info-item">
+        <h4>Date</h4>
+        <p>12th July 2026</p>
+        <small>Sunday</small>
       </div>
-      <div class="blessing-text">With the blessings of God &amp; our families</div>
+      <div class="info-item">
+        <h4>Muhurtham</h4>
+        <p>10:30 - 11:30</p>
+        <small>AM</small>
+      </div>
     </div>
 
-    <!-- Main content -->
-    <div class="main-content">
-
-      <div class="divider anim" style="margin-top:28px;" data-delay="600">
-        <div class="divider-line"></div>
-        <div class="divider-ornament">✦</div>
-        <div class="divider-line"></div>
-      </div>
-
-      <p class="invite-pretext anim" data-delay="800">Together with our families, we joyfully invite you to celebrate the wedding of</p>
-
-      <div class="names anim" data-delay="1000">
-        <span id="name1"></span>
-        <span class="ampersand">&amp;</span>
-        <span id="name2"></span>
-      </div>
-
-      <div class="wedding-title anim" data-delay="1600">Wedding Ceremony</div>
-
-      <div class="lotus-divider anim" data-delay="1800">
-        <div class="lotus-line" id="ll"></div>
-        <svg class="lotus-svg" width="40" height="36" viewBox="0 0 40 36" fill="none">
-          <ellipse cx="20" cy="22" rx="4" ry="8" fill="#b8965a" opacity="0.7"/>
-          <ellipse cx="20" cy="22" rx="4" ry="8" fill="#b8965a" opacity="0.5" transform="rotate(-35 20 26)"/>
-          <ellipse cx="20" cy="22" rx="4" ry="8" fill="#b8965a" opacity="0.5" transform="rotate(35 20 26)"/>
-          <ellipse cx="20" cy="22" rx="3" ry="6" fill="#b8965a" opacity="0.35" transform="rotate(-65 20 26)"/>
-          <ellipse cx="20" cy="22" rx="3" ry="6" fill="#b8965a" opacity="0.35" transform="rotate(65 20 26)"/>
-          <path d="M6 30 Q20 26 34 30" stroke="#b8965a" stroke-width="1" opacity="0.4" fill="none"/>
-          <path d="M10 32 Q20 29 30 32" stroke="#b8965a" stroke-width="0.6" opacity="0.25" fill="none"/>
-        </svg>
-        <div class="lotus-line right" id="lr"></div>
-      </div>
-
-      <p class="invite-body anim" data-delay="2000">
-        Your presence and blessings<br>
-        would make our special day<br>
-        truly complete <span class="heart">♥</span>
-      </p>
-
-      <div class="details-block">
-        <div class="detail-row" data-delay="2200">
-          <div class="detail-icon">☽</div>
-          <div class="detail-content">
-            <span class="detail-label">Date</span>
-            <div class="detail-value">Sunday, 12<sup>th</sup> July 2026</div>
-          </div>
-        </div>
-        <div class="detail-row" data-delay="2400">
-          <div class="detail-icon flame-icon">🕯</div>
-          <div class="detail-content">
-            <span class="detail-label">Time</span>
-            <div class="detail-value">10:30 AM onwards</div>
-          </div>
-        </div>
-        <div class="detail-row" data-delay="2600">
-          <div class="detail-icon">⌂</div>
-          <div class="detail-content">
-            <span class="detail-label">Venue</span>
-            <div class="detail-value">
-              Sri Lakshmi Balaji Thirumana Mandapam
-              <small>Madukkarai, Coimbatore</small>
-              <a href="https://maps.app.goo.gl/wRWfttmKGqMjPZiU8" target="_blank" class="inline-block border border-gold px-10 py-3 text-[10px] uppercase tracking-[0.3em] text-gold hover:bg-gold hover:text-white transition-all duration-500">
-                        View Location
-                    </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="rsvp-section anim" data-delay="2800">
-        <div class="rsvp-label">RSVP</div>
-        <div class="rsvp-contact">+91 90438 91097</div>
-        <p class="rsvp-note">We look forward to your gracious presence</p>
-      </div>
-
-      <div class="divider anim" style="margin-bottom:8px;" data-delay="3000">
-        <div class="divider-line"></div>
-        <div class="divider-ornament">✦</div>
-        <div class="divider-line"></div>
-      </div>
-
+    <div class="venue-details">
+      <p><strong>Sree Lakshmi Balaji Thirumanam Mandabam</strong></p>
+      <p>Madukkarai, Palakad Main Road, Coimbatore.</p>
     </div>
 
-    <div class="bottom-ornament">
-      <span>· · ✦ · ·</span>
-    </div>
+    <button class="bless-btn" onclick="showerBlessings()">Click to Shower Blessings</button>
 
+    <div style="margin-top: 40px; border-top: 1px solid #eee; padding-top: 20px;">
+      <p style="font-style: italic; font-size: 0.8rem; color: #888;">"Your presence and blessings will add love and joy to our son's big day."</p>
+    </div>
+  </div>
+
+  <div class="footer-art">
+    ❀ ❀ ❀ ❀ ❀ ❀ ❀
   </div>
 </div>
 
 <script>
-/* ─── 1. STAGGERED REVEALS ─── */
-document.querySelectorAll('.anim').forEach(el => {
-  const d = parseInt(el.dataset.delay) || 600;
-  setTimeout(() => {
-    el.style.transition = 'opacity 0.85s ease, transform 0.85s cubic-bezier(0.22,1,0.36,1)';
-    el.style.opacity = '1';
-    el.style.transform = 'none';
-  }, d);
-});
+const canvas = document.getElementById('flowerCanvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
 
-document.querySelectorAll('.detail-row').forEach(row => {
-  const d = parseInt(row.dataset.delay) || 2200;
-  setTimeout(() => {
-    row.style.transition = 'opacity 0.7s ease, transform 0.7s cubic-bezier(0.22,1,0.36,1)';
-    row.style.opacity = '1';
-    row.style.transform = 'none';
-  }, d);
-});
-
-/* Lotus lines */
-setTimeout(() => {
-  document.getElementById('ll').classList.add('open');
-  document.getElementById('lr').classList.add('open');
-}, 2000);
-
-/* ─── 2. LETTER-BY-LETTER NAME REVEAL ─── */
-function typeLetters(elId, text, baseDelay, gap) {
-  const el = document.getElementById(elId);
-  text.split('').forEach((ch, i) => {
-    const s = document.createElement('span');
-    s.className = 'name-letter';
-    s.textContent = ch === ' ' ? '\u00A0' : ch;
-    el.appendChild(s);
-    setTimeout(() => {
-      s.style.transition = 'opacity 0.35s ease, transform 0.45s cubic-bezier(0.34,1.56,0.64,1)';
-      s.style.opacity = '1';
-      s.style.transform = 'translateY(0)';
-    }, baseDelay + i * gap);
-  });
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 }
-typeLetters('name1', 'Ashwin',    1150, 80);
-typeLetters('name2', 'Vathchala', 1380, 70);
-
-/* ─── 3. FALLING ROSE PETALS ─── */
-const canvas = document.getElementById('petal-canvas');
-const ctx    = canvas.getContext('2d');
-let W, H;
-
-function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
-resize();
 window.addEventListener('resize', resize);
+resize();
 
-const COLORS = ['#e8b4a0','#d49080','#f0c8b0','#c87060','#f5ddd0','#d4af7a'];
-
-class Petal {
-  constructor(init) {
-    this.x      = Math.random() * (W || 800);
-    this.y      = init ? Math.random() * (H || 600) : -20;
-    this.r      = 5 + Math.random() * 8;
-    this.dx     = (Math.random() - 0.5) * 0.7;
-    this.dy     = 0.55 + Math.random() * 1.1;
-    this.rot    = Math.random() * Math.PI * 2;
-    this.drot   = (Math.random() - 0.5) * 0.04;
-    this.wobble = Math.random() * Math.PI * 2;
-    this.color  = COLORS[Math.floor(Math.random() * COLORS.length)];
-    this.alpha  = 0.5 + Math.random() * 0.4;
-    this.sy     = 0.4 + Math.random() * 0.35;
+class Particle {
+  constructor(x, y, isRice) {
+    this.x = x;
+    this.y = y;
+    this.size = isRice ? Math.random() * 3 + 2 : Math.random() * 10 + 5;
+    this.speedY = Math.random() * 3 + 2;
+    this.speedX = (Math.random() - 0.5) * 4;
+    this.color = isRice ? '#fff' : (Math.random() > 0.5 ? '#ff8c00' : '#ffd700');
+    this.rotation = Math.random() * 360;
+    this.spin = Math.random() * 5;
   }
   update() {
-    this.wobble += 0.03;
-    this.x  += this.dx + Math.sin(this.wobble) * 0.55;
-    this.y  += this.dy;
-    this.rot += this.drot;
-    if (this.y > H + 30) { this.y = -20; this.x = Math.random() * W; }
+    this.y += this.speedY;
+    this.x += this.speedX;
+    this.rotation += this.spin;
   }
   draw() {
     ctx.save();
-    ctx.globalAlpha = this.alpha;
     ctx.translate(this.x, this.y);
-    ctx.rotate(this.rot);
-    ctx.scale(1, this.sy);
-    ctx.beginPath();
-    ctx.ellipse(0, 0, this.r, this.r * 1.65, 0, 0, Math.PI * 2);
+    ctx.rotate(this.rotation * Math.PI / 180);
     ctx.fillStyle = this.color;
-    ctx.fill();
-    ctx.beginPath();
-    ctx.ellipse(-this.r * 0.2, -this.r * 0.3, this.r * 0.35, this.r * 0.55, -0.4, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(255,255,255,0.28)';
-    ctx.fill();
+    if (this.size > 5) { // Flower petal
+        ctx.beginPath();
+        ctx.ellipse(0, 0, this.size, this.size/2, 0, 0, Math.PI * 2);
+        ctx.fill();
+    } else { // Rice grain
+        ctx.fillRect(0, 0, this.size, this.size*2);
+    }
     ctx.restore();
   }
 }
 
-const petals = Array.from({ length: 40 }, () => new Petal(true));
-(function loop() { ctx.clearRect(0,0,W,H); petals.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(loop); })();
+function showerBlessings() {
+  for(let i=0; i<100; i++) {
+    particles.push(new Particle(Math.random() * canvas.width, -20, Math.random() > 0.3));
+  }
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for(let i=0; i<particles.length; i++) {
+    particles[i].update();
+    particles[i].draw();
+    if(particles[i].y > canvas.height) {
+      particles.splice(i, 1);
+      i--;
+    }
+  }
+  requestAnimationFrame(animate);
+}
+
+// Initial subtle fall
+setInterval(() => {
+    if(particles.length < 20) {
+        particles.push(new Particle(Math.random() * canvas.width, -20, false));
+    }
+}, 1000);
+
+animate();
+
+// Creative 2D Mouse Parallax for Bells
+window.addEventListener('mousemove', (e) => {
+    const bells = document.querySelectorAll('.bell');
+    const moveX = (e.clientX - window.innerWidth / 2) / 50;
+    bells.forEach(bell => {
+        bell.style.transform = `rotate(${moveX}deg)`;
+    });
+});
 </script>
+
 </body>
 </html>
