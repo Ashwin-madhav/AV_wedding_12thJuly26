@@ -10,16 +10,17 @@
     --gold: #b8965a;
     --gold-light: #d4af7a;
     --gold-pale: #f0e0c0;
-    --cream: #faf6f0;
-    --deep: #1a1208;
-    --text: #3a2c18;
-    --muted: #7a6548;
+    --deep-green: #0b2110; /* Deep Emerald */
+    --leaf-green: #2d5a27; /* Rich Leaf Green */
+    --sage-bg: #f2f7f2;   /* Soft Sage Background */
+    --text: #1a2e1a;
+    --muted: #4a634a;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background: #e8dcc8;
+    background: #d4ddd4; /* Sage base */
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -27,9 +28,9 @@
     font-family: 'EB Garamond', serif;
     padding: 40px 20px;
     overflow-x: hidden;
-    background-image:
-      radial-gradient(ellipse at 20% 20%, rgba(184,150,90,0.15) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 80%, rgba(184,150,90,0.12) 0%, transparent 50%);
+    background-image: 
+      radial-gradient(circle at 10% 10%, rgba(45, 90, 39, 0.1) 0%, transparent 40%),
+      radial-gradient(circle at 90% 90%, rgba(45, 90, 39, 0.1) 0%, transparent 40%);
   }
 
   #petal-canvas {
@@ -52,324 +53,168 @@
   }
 
   .card {
-    background: var(--cream);
+    background: var(--sage-bg);
     width: min(600px, 100%);
     position: relative;
     overflow: hidden;
-    box-shadow:
-      0 0 0 1px rgba(184,150,90,0.3),
-      0 4px 6px rgba(0,0,0,0.05),
-      0 20px 60px rgba(0,0,0,0.18),
-      0 40px 100px rgba(0,0,0,0.1);
-  }
-  .card::before {
-    content: '';
-    position: absolute; inset: 12px;
-    border: 1px solid rgba(184,150,90,0.4);
-    pointer-events: none; z-index: 10;
-  }
-  .card::after {
-    content: '';
-    position: absolute; inset: 16px;
-    border: 0.5px solid rgba(184,150,90,0.2);
-    pointer-events: none; z-index: 10;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    border: 1px solid rgba(45, 90, 39, 0.2);
   }
 
-  /* Gold shimmer sweep */
-  .shimmer-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(110deg,
-      transparent 30%,
-      rgba(255,255,255,0.18) 50%,
-      transparent 70%);
-    background-size: 200% 100%;
-    animation: shimmer 4s ease-in-out 1.8s infinite;
-    pointer-events: none; z-index: 9;
+  /* SIDE BANANA LEAVES */
+  .banana-leaf-decor {
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 60px;
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 1;
   }
-  @keyframes shimmer {
-    0%   { background-position: -100% 0; }
-    40%  { background-position: 200% 0; }
-    100% { background-position: 200% 0; }
-  }
+  .leaf-left { left: 0; transform: scaleX(1); }
+  .leaf-right { right: 0; transform: scaleX(-1); }
 
   /* TOP BANNER */
   .top-banner {
-    background: var(--deep);
-    padding: 28px 40px 22px;
+    background: var(--deep-green);
+    padding: 35px 40px 25px;
     text-align: center;
-    position: relative; overflow: hidden;
+    position: relative;
+    border-bottom: 2px solid var(--gold);
   }
-  .top-banner::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: repeating-linear-gradient(
-      90deg,
-      rgba(184,150,90,0.08) 0px, rgba(184,150,90,0.08) 1px,
-      transparent 1px, transparent 40px
-    );
+
+  .parrot-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 10px;
+  }
+
+  .parrot-svg {
+    width: 45px;
+    height: 45px;
+    fill: var(--gold);
+    opacity: 0.8;
   }
 
   .mandala-ring {
-    width: 60px; height: 60px;
-    margin: 0 auto 6px;
+    width: 70px; height: 70px;
     position: relative;
     display: flex; align-items: center; justify-content: center;
   }
   .mandala-ring svg {
     position: absolute; inset: 0;
-    animation: spinSlow 20s linear infinite;
-  }
-  .mandala-ring svg.counter {
-    animation: spinSlow 28s linear infinite reverse;
-    opacity: 0.5;
+    animation: spinSlow 25s linear infinite;
   }
   @keyframes spinSlow { to { transform: rotate(360deg); } }
 
   .om-symbol {
-    font-size: 26px; color: var(--gold);
+    font-size: 28px; color: var(--gold);
     position: relative; z-index: 2;
-    animation: glow 3s ease-in-out infinite alternate;
-  }
-  @keyframes glow {
-    from { text-shadow: 0 0 8px rgba(184,150,90,0.4); }
-    to   { text-shadow: 0 0 24px rgba(184,150,90,1), 0 0 48px rgba(184,150,90,0.4); }
+    text-shadow: 0 0 15px rgba(184,150,90,0.5);
   }
 
   .blessing-text {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     color: var(--gold-pale);
-    font-size: 13px; letter-spacing: 2px;
-    opacity: 0;
-    animation: fadeIn 1s ease 1.4s forwards;
+    font-size: 14px; letter-spacing: 2px;
+    margin-top: 15px;
   }
-  @keyframes fadeIn { to { opacity: 0.85; } }
-
-  /* DIVIDER */
-  .divider {
-    display: flex; align-items: center; gap: 12px;
-    padding: 0 40px; margin: 20px 0;
-  }
-  .divider-line {
-    flex: 1; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  }
-  .divider-ornament { color: var(--gold); font-size: 18px; line-height: 1; }
 
   /* MAIN CONTENT */
-  .main-content { padding: 10px 50px 40px; text-align: center; }
+  .main-content { padding: 20px 50px 40px; text-align: center; position: relative; z-index: 2;}
 
-  .anim { opacity: 0; transform: translateY(24px); }
-
-  .invite-pretext {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic; color: var(--muted);
-    font-size: 15px; letter-spacing: 1px; margin-bottom: 8px;
-  }
+  .anim { opacity: 0; transform: translateY(20px); }
 
   .names {
     font-family: 'Cormorant Garamond', serif;
-    font-weight: 300; color: var(--deep);
-    font-size: clamp(48px, 10vw, 72px);
-    line-height: 1.05; letter-spacing: -1px;
+    font-weight: 300; color: var(--deep-green);
+    font-size: clamp(40px, 9vw, 68px);
+    line-height: 1.1; margin: 15px 0;
   }
   .names .ampersand {
     color: var(--gold); font-style: italic;
-    font-size: 0.85em; display: block; margin: -6px 0;
-  }
-  .name-letter {
-    display: inline-block;
-    opacity: 0; transform: translateY(20px);
+    font-size: 0.7em; display: block;
   }
 
-  .wedding-title {
-    font-family: 'Cinzel', serif;
-    font-size: 11px; letter-spacing: 5px;
-    color: var(--gold); text-transform: uppercase; margin-top: 4px;
-  }
-
-  /* Animated lotus divider */
+  /* LOTUS DIVIDER */
   .lotus-divider {
-    margin: 20px auto;
-    display: flex; align-items: center; justify-content: center; gap: 10px;
+    display: flex; align-items: center; justify-content: center; gap: 15px;
+    margin: 25px 0;
   }
   .lotus-line {
     flex: 1; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold));
-    max-width: 120px;
-    transform: scaleX(0); transform-origin: right;
-    transition: transform 0.9s cubic-bezier(0.22,1,0.36,1);
+    background: linear-gradient(90deg, transparent, var(--leaf-green), transparent);
   }
-  .lotus-line.right {
-    background: linear-gradient(90deg, var(--gold), transparent);
-    transform-origin: left;
-  }
-  .lotus-line.open { transform: scaleX(1); }
-
-  .lotus-svg { animation: floatPulse 4s ease-in-out infinite; }
-  @keyframes floatPulse {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50%       { transform: translateY(-4px) scale(1.06); }
-  }
-
-  .invite-body {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic; color: var(--muted);
-    font-size: 16px; line-height: 1.8; margin-bottom: 28px;
-  }
-
-  .heart {
-    display: inline-block;
-    color: #c0524a; font-size: 14px;
-    animation: heartbeat 1.4s ease-in-out infinite;
-  }
-  @keyframes heartbeat {
-    0%, 100% { transform: scale(1); }
-    15%       { transform: scale(1.35); }
-    30%       { transform: scale(1); }
-    45%       { transform: scale(1.2); }
-    60%       { transform: scale(1); }
-  }
+  .lotus-main { fill: var(--leaf-green); opacity: 0.8; }
 
   /* DETAILS BLOCK */
   .details-block {
-    background: var(--deep);
-    margin: 0 -50px; padding: 32px 50px;
-    position: relative;
+    background: var(--deep-green);
+    margin: 30px -50px; padding: 35px 50px;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
   }
-  .details-block::before {
-    content: ''; position: absolute;
-    top: 0; left: 0; right: 0; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  }
-  .details-block::after {
-    content: ''; position: absolute;
-    bottom: 0; left: 0; right: 0; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  }
-
   .detail-row {
-    display: flex; align-items: flex-start; gap: 16px;
-    margin-bottom: 20px; text-align: left;
-    opacity: 0; transform: translateX(-20px);
+    display: flex; align-items: flex-start; gap: 18px;
+    margin-bottom: 22px; text-align: left;
   }
-  .detail-row:last-child { margin-bottom: 0; }
-
-  .detail-icon {
-    color: var(--gold); font-size: 20px;
-    flex-shrink: 0; margin-top: 2px;
-    width: 24px; text-align: center;
-  }
-  .flame-icon { animation: flicker 1.8s ease-in-out infinite alternate; }
-  @keyframes flicker {
-    0%   { transform: scaleY(1)    rotate(-1deg);  opacity: 1; }
-    30%  { transform: scaleY(1.08) rotate(1deg);   opacity: 0.85; }
-    60%  { transform: scaleY(0.95) rotate(-2deg);  opacity: 1; }
-    100% { transform: scaleY(1.05) rotate(1.5deg); opacity: 0.9; }
-  }
-
+  .detail-icon { color: var(--gold); font-size: 22px; }
   .detail-label {
-    font-family: 'Cinzel', serif; font-size: 9px;
+    font-family: 'Cinzel', serif; font-size: 10px;
     letter-spacing: 3px; color: var(--gold);
-    text-transform: uppercase; display: block; margin-bottom: 3px;
+    text-transform: uppercase; margin-bottom: 4px;
+    display: block;
   }
   .detail-value {
     font-family: 'Cormorant Garamond', serif;
-    color: var(--gold-pale); font-size: 18px; font-weight: 300; line-height: 1.3;
-  }
-  .detail-value small {
-    font-size: 14px; opacity: 0.75; font-style: italic;
-    display: block; margin-top: 2px;
+    color: var(--gold-pale); font-size: 19px;
   }
 
-  /* Location Button */
-  .btn-container { margin-top: 15px; }
+  /* COUNTDOWN */
+  #countdown {
+    margin-top: 30px;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid rgba(184, 150, 90, 0.2);
+    padding-top: 25px;
+  }
+  .count-box span { font-size: 28px; color: var(--gold-pale); display: block; }
+  .count-box p { font-size: 8px; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; }
+
+  /* RSVP CREATIVE */
+  .rsvp-section { margin-top: 30px; }
+  .rsvp-card {
+    border: 1px solid rgba(45, 90, 39, 0.3);
+    padding: 20px; display: inline-block;
+    background: white; border-radius: 4px;
+  }
+  .phone-link {
+    text-decoration: none; color: var(--deep-green);
+    font-size: 22px; font-weight: bold; letter-spacing: 1px;
+    display: block; margin: 10px 0;
+  }
+  .contact-btns { display: flex; gap: 15px; justify-content: center; }
+  .contact-btns a {
+    text-decoration: none; color: var(--leaf-green);
+    font-size: 10px; text-transform: uppercase; letter-spacing: 1px;
+    border: 1px solid var(--leaf-green); padding: 5px 12px;
+    transition: 0.3s;
+  }
+  .contact-btns a:hover { background: var(--leaf-green); color: white; }
+
   .location-btn {
     display: inline-block;
     border: 1px solid var(--gold);
-    padding: 10px 24px;
-    font-size: 10px;
-    font-family: 'Cinzel', serif;
-    text-transform: uppercase;
-    letter-spacing: 0.3em;
+    padding: 10px 20px;
     color: var(--gold);
     text-decoration: none;
-    transition: all 0.5s ease;
-  }
-  .location-btn:hover {
-    background: var(--gold);
-    color: var(--deep);
-  }
-
-  /* COUNTDOWN STYLES */
-  #countdown {
-    margin-top: 40px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-    border-top: 1px solid rgba(184, 150, 90, 0.1);
-    padding-top: 30px;
-  }
-  .countdown-box span {
-    font-family: 'EB Garamond', serif;
-    font-size: 32px;
-    color: var(--gold-pale);
-    display: block;
-    line-height: 1;
-  }
-  .countdown-box p {
-    font-family: 'Cinzel', serif;
-    font-size: 9px;
+    font-size: 10px; letter-spacing: 2px;
     text-transform: uppercase;
-    tracking-widest: 0.2em;
-    color: var(--gold);
-    margin-top: 8px;
-    opacity: 0.8;
+    margin-top: 12px;
   }
+  .location-btn:hover { background: var(--gold); color: var(--deep-green); }
 
-  /* RSVP */
-  .rsvp-section { padding: 28px 0 10px; }
-  .rsvp-label {
-    font-family: 'Cinzel', serif; font-size: 10px;
-    letter-spacing: 4px; color: var(--gold);
-    text-transform: uppercase; margin-bottom: 8px;
-  }
-  .rsvp-contact {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px; color: var(--text); font-weight: 400;
-  }
-  .rsvp-note {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic; color: var(--muted); font-size: 13.5px; margin-top: 6px;
-  }
-
-  /* BOTTOM */
-  .bottom-ornament {
-    background: var(--deep); padding: 18px 40px; text-align: center;
-  }
-  .bottom-ornament span { color: var(--gold); font-size: 22px; letter-spacing: 12px; }
-
-  /* CORNERS */
-  .corner { position: absolute; width: 50px; height: 50px; z-index: 11; }
-  .corner svg { width: 100%; height: 100%; }
-  .corner-tl { top: 22px; left: 22px; }
-  .corner-tr { top: 22px; right: 22px; transform: scaleX(-1); }
-  .corner-bl { bottom: 22px; left: 22px; transform: scaleY(-1); }
-  .corner-br { bottom: 22px; right: 22px; transform: scale(-1); }
-
-  .corner-path {
-    stroke-dasharray: 80; stroke-dashoffset: 80;
-    animation: drawCorner 1s ease 0.8s forwards;
-  }
-  @keyframes drawCorner { to { stroke-dashoffset: 0; } }
-  .corner-curve {
-    stroke-dasharray: 30; stroke-dashoffset: 30;
-    animation: drawCorner 1.2s ease 1.2s forwards;
-  }
-  .corner-dot {
-    opacity: 0;
-    animation: fadeIn 0.3s ease 1.8s forwards;
-  }
 </style>
 </head>
 <body>
@@ -378,244 +223,188 @@
 
 <div class="envelope-wrap">
   <div class="card">
-    <div class="shimmer-overlay"></div>
+    
+    <!-- Banana Tree Background Elements -->
+    <div class="banana-leaf-decor leaf-left">
+        <svg viewBox="0 0 100 800"><path d="M50 0 L50 800 M50 100 Q80 150 50 200 M50 250 Q90 300 50 350 M50 400 Q80 450 50 500 M50 550 Q90 600 50 650" stroke="green" fill="none" stroke-width="2" opacity="0.5"/></svg>
+    </div>
+    <div class="banana-leaf-decor leaf-right">
+        <svg viewBox="0 0 100 800"><path d="M50 0 L50 800 M50 100 Q80 150 50 200 M50 250 Q90 300 50 350 M50 400 Q80 450 50 500 M50 550 Q90 600 50 650" stroke="green" fill="none" stroke-width="2" opacity="0.5"/></svg>
+    </div>
 
-    <!-- Corners -->
-    <div class="corner corner-tl"><svg viewBox="0 0 50 50" fill="none"><path class="corner-path" d="M2 2 L2 20 M2 2 L20 2" stroke="#b8965a" stroke-width="1.5"/><path class="corner-curve" d="M2 2 Q 15 8, 25 25" stroke="#b8965a" stroke-width="0.5" opacity="0.4"/><circle class="corner-dot" cx="2" cy="2" r="2" fill="#b8965a"/></svg></div>
-    <div class="corner corner-tr"><svg viewBox="0 0 50 50" fill="none"><path class="corner-path" d="M2 2 L2 20 M2 2 L20 2" stroke="#b8965a" stroke-width="1.5"/><path class="corner-curve" d="M2 2 Q 15 8, 25 25" stroke="#b8965a" stroke-width="0.5" opacity="0.4"/><circle class="corner-dot" cx="2" cy="2" r="2" fill="#b8965a"/></svg></div>
-    <div class="corner corner-bl"><svg viewBox="0 0 50 50" fill="none"><path class="corner-path" d="M2 2 L2 20 M2 2 L20 2" stroke="#b8965a" stroke-width="1.5"/><path class="corner-curve" d="M2 2 Q 15 8, 25 25" stroke="#b8965a" stroke-width="0.5" opacity="0.4"/><circle class="corner-dot" cx="2" cy="2" r="2" fill="#b8965a"/></svg></div>
-    <div class="corner corner-br"><svg viewBox="0 0 50 50" fill="none"><path class="corner-path" d="M2 2 L2 20 M2 2 L20 2" stroke="#b8965a" stroke-width="1.5"/><path class="corner-curve" d="M2 2 Q 15 8, 25 25" stroke="#b8965a" stroke-width="0.5" opacity="0.4"/><circle class="corner-dot" cx="2" cy="2" r="2" fill="#b8965a"/></svg></div>
-
+    <!-- Top banner -->
     <div class="top-banner">
-      <div class="mandala-ring">
-        <svg viewBox="0 0 60 60" fill="none">
-          <circle cx="30" cy="30" r="28" stroke="#b8965a" stroke-width="0.5" stroke-dasharray="4 3" opacity="0.6"/>
-          <circle cx="30" cy="30" r="24" stroke="#b8965a" stroke-width="0.3" opacity="0.3"/>
-          <ellipse cx="30" cy="4"  rx="2" ry="4" fill="#b8965a" opacity="0.4"/>
-          <ellipse cx="30" cy="4"  rx="2" ry="4" fill="#b8965a" opacity="0.4" transform="rotate(45 30 30)"/>
-          <ellipse cx="30" cy="4"  rx="2" ry="4" fill="#b8965a" opacity="0.4" transform="rotate(90 30 30)"/>
-          <ellipse cx="30" cy="4"  rx="2" ry="4" fill="#b8965a" opacity="0.4" transform="rotate(135 30 30)"/>
-          <ellipse cx="30" cy="4"  rx="2" ry="4" fill="#b8965a" opacity="0.4" transform="rotate(180 30 30)"/>
-          <ellipse cx="30" cy="4"  rx="2" ry="4" fill="#b8965a" opacity="0.4" transform="rotate(225 30 30)"/>
-          <ellipse cx="30" cy="4"  rx="2" ry="4" fill="#b8965a" opacity="0.4" transform="rotate(270 30 30)"/>
-          <ellipse cx="30" cy="4"  rx="2" ry="4" fill="#b8965a" opacity="0.4" transform="rotate(315 30 30)"/>
+      <div class="parrot-container">
+        <!-- Left Parrot -->
+        <svg class="parrot-svg" viewBox="0 0 100 100">
+            <path d="M80 20 Q90 10 70 10 Q50 10 40 30 Q30 50 40 70 L30 90 L50 80 Q70 80 80 60 Z" />
+            <circle cx="75" cy="25" r="3" fill="black" />
         </svg>
-        <svg class="counter" viewBox="0 0 60 60" fill="none">
-          <circle cx="30" cy="30" r="19" stroke="#b8965a" stroke-width="0.5" stroke-dasharray="2 4" opacity="0.4"/>
-          <circle cx="30" cy="11" r="1.5" fill="#b8965a" opacity="0.6"/>
-          <circle cx="30" cy="11" r="1.5" fill="#b8965a" opacity="0.6" transform="rotate(60 30 30)"/>
-          <circle cx="30" cy="11" r="1.5" fill="#b8965a" opacity="0.6" transform="rotate(120 30 30)"/>
-          <circle cx="30" cy="11" r="1.5" fill="#b8965a" opacity="0.6" transform="rotate(180 30 30)"/>
-          <circle cx="30" cy="11" r="1.5" fill="#b8965a" opacity="0.6" transform="rotate(240 30 30)"/>
-          <circle cx="30" cy="11" r="1.5" fill="#b8965a" opacity="0.6" transform="rotate(300 30 30)"/>
+        
+        <div class="mandala-ring">
+            <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="28" stroke="#b8965a" stroke-dasharray="2 2" fill="none"/></svg>
+            <span class="om-symbol">ॐ</span>
+        </div>
+
+        <!-- Right Parrot (Flipped) -->
+        <svg class="parrot-svg" viewBox="0 0 100 100" style="transform: scaleX(-1);">
+            <path d="M80 20 Q90 10 70 10 Q50 10 40 30 Q30 50 40 70 L30 90 L50 80 Q70 80 80 60 Z" />
+            <circle cx="75" cy="25" r="3" fill="black" />
         </svg>
-        <span class="om-symbol">ॐ</span>
       </div>
       <div class="blessing-text">With the blessings of God &amp; our families</div>
     </div>
 
+    <!-- Main content -->
     <div class="main-content">
-      <div class="divider anim" style="margin-top:28px;" data-delay="600">
-        <div class="divider-line"></div>
-        <div class="divider-ornament">✦</div>
-        <div class="divider-line"></div>
-      </div>
+      <p class="invite-pretext anim" data-delay="600">We joyfully invite you to the wedding of</p>
 
-      <p class="invite-pretext anim" data-delay="800">Together with our families, we joyfully invite you to celebrate the wedding of</p>
-
-      <div class="names anim" data-delay="1000">
+      <div class="names anim" data-delay="800">
         <span id="name1"></span>
         <span class="ampersand">&amp;</span>
         <span id="name2"></span>
       </div>
 
-      <div class="wedding-title anim" data-delay="1600">Wedding Ceremony</div>
-
-      <div class="lotus-divider anim" data-delay="1800">
-        <div class="lotus-line" id="ll"></div>
-        <svg class="lotus-svg" width="40" height="36" viewBox="0 0 40 36" fill="none">
-          <ellipse cx="20" cy="22" rx="4" ry="8" fill="#b8965a" opacity="0.7"/><ellipse cx="20" cy="22" rx="4" ry="8" fill="#b8965a" opacity="0.5" transform="rotate(-35 20 26)"/><ellipse cx="20" cy="22" rx="4" ry="8" fill="#b8965a" opacity="0.5" transform="rotate(35 20 26)"/><ellipse cx="20" cy="22" rx="3" ry="6" fill="#b8965a" opacity="0.35" transform="rotate(-65 20 26)"/><ellipse cx="20" cy="22" rx="3" ry="6" fill="#b8965a" opacity="0.35" transform="rotate(65 20 26)"/><path d="M6 30 Q20 26 34 30" stroke="#b8965a" stroke-width="1" opacity="0.4" fill="none"/><path d="M10 32 Q20 29 30 32" stroke="#b8965a" stroke-width="0.6" opacity="0.25" fill="none"/>
+      <div class="lotus-divider anim" data-delay="1000">
+        <div class="lotus-line"></div>
+        <svg height="30" width="30" viewBox="0 0 100 100" class="lotus-main">
+            <path d="M50 10 Q60 40 90 50 Q60 60 50 90 Q40 60 10 50 Q40 40 50 10" />
+            <path d="M50 30 Q55 45 70 50 Q55 55 50 70 Q45 55 30 50 Q45 45 50 30" opacity="0.5"/>
         </svg>
-        <div class="lotus-line right" id="lr"></div>
+        <div class="lotus-line"></div>
       </div>
 
-      <p class="invite-body anim" data-delay="2000">
+      <p class="invite-body anim" data-delay="1200">
         Your presence and blessings<br>
         would make our special day<br>
-        truly complete <span class="heart">♥</span>
+        truly complete <span style="color:#d44">♥</span>
       </p>
 
       <div class="details-block">
-        <div class="detail-row" data-delay="2200">
-          <div class="detail-icon">☽</div>
-          <div class="detail-content">
+        <div class="detail-row anim" data-delay="1400">
+          <div class="detail-icon">📅</div>
+          <div>
             <span class="detail-label">Date</span>
             <div class="detail-value">Sunday, 12<sup>th</sup> July 2026</div>
           </div>
         </div>
-        <div class="detail-row" data-delay="2400">
-          <div class="detail-icon flame-icon">🕯</div>
-          <div class="detail-content">
+        <div class="detail-row anim" data-delay="1600">
+          <div class="detail-icon">🪔</div>
+          <div>
             <span class="detail-label">Time</span>
             <div class="detail-value">10:30 AM onwards</div>
           </div>
         </div>
-        <div class="detail-row" data-delay="2600">
-          <div class="detail-icon">⌂</div>
-          <div class="detail-content">
+        <div class="detail-row anim" data-delay="1800">
+          <div class="detail-icon">📍</div>
+          <div>
             <span class="detail-label">Venue</span>
             <div class="detail-value">
               Sri Lakshmi Balaji Thirumana Mandapam
-              <small>Madukkarai, Coimbatore</small>
+              <small style="display:block; font-size:13px; opacity:0.7;">Madukkarai, Coimbatore</small>
             </div>
-            <div class="btn-container">
-              <a href="https://maps.app.goo.gl/wRWfttmKGqMjPZiU8" target="_blank" class="location-btn">View Location</a>
-            </div>
+            <a href="https://maps.app.goo.gl/wRWfttmKGqMjPZiU8" target="_blank" class="location-btn">View Location</a>
           </div>
         </div>
 
-        <!-- Countdown Integrated Here -->
-        <div id="countdown" class="anim" data-delay="2800">
-            <div class="countdown-box"><span id="days">00</span><p>Days</p></div>
-            <div class="countdown-box"><span id="hours">00</span><p>Hours</p></div>
-            <div class="countdown-box"><span id="minutes">00</span><p>Mins</p></div>
-            <div class="countdown-box"><span id="seconds">00</span><p>Secs</p></div>
+        <div id="countdown" class="anim" data-delay="2000">
+            <div class="count-box"><span id="days">00</span><p>Days</p></div>
+            <div class="count-box"><span id="hours">00</span><p>Hours</p></div>
+            <div class="count-box"><span id="minutes">00</span><p>Mins</p></div>
+            <div class="count-box"><span id="seconds">00</span><p>Secs</p></div>
         </div>
       </div>
 
-      <div class="rsvp-section anim" data-delay="3000">
-        <div class="rsvp-label">RSVP</div>
-        <div class="rsvp-contact">+91 90438 91097</div>
-        <p class="rsvp-note">We look forward to your gracious presence</p>
+      <div class="rsvp-section anim" data-delay="2200">
+        <div class="detail-label" style="color:var(--leaf-green)">RSVP</div>
+        <div class="rsvp-card">
+            <a href="tel:+919043891097" class="phone-link">+91 90438 91097</a>
+            <div class="contact-btns">
+                <a href="tel:+919043891097">Call</a>
+                <a href="https://wa.me/919043891097">WhatsApp</a>
+            </div>
+        </div>
       </div>
 
-      <div class="divider anim" style="margin-bottom:8px;" data-delay="3200">
-        <div class="divider-line"></div>
-        <div class="divider-ornament">✦</div>
-        <div class="divider-line"></div>
-      </div>
     </div>
 
-    <div class="bottom-ornament"><span>· · ✦ · ·</span></div>
+    <div style="background:var(--deep-green); padding:15px; text-align:center; color:var(--gold);">
+        <small style="letter-spacing:5px;">❃ ❃ ❃</small>
+    </div>
   </div>
 </div>
 
 <script>
-/* ─── 1. STAGGERED REVEALS ─── */
+/* ─── 1. ANIMATIONS ─── */
 document.querySelectorAll('.anim').forEach(el => {
-  const d = parseInt(el.dataset.delay) || 600;
   setTimeout(() => {
-    el.style.transition = 'opacity 0.85s ease, transform 0.85s cubic-bezier(0.22,1,0.36,1)';
+    el.style.transition = 'all 0.8s ease-out';
     el.style.opacity = '1';
     el.style.transform = 'none';
-  }, d);
+  }, el.dataset.delay);
 });
 
-document.querySelectorAll('.detail-row').forEach(row => {
-  const d = parseInt(row.dataset.delay) || 2200;
-  setTimeout(() => {
-    row.style.transition = 'opacity 0.7s ease, transform 0.7s cubic-bezier(0.22,1,0.36,1)';
-    row.style.opacity = '1';
-    row.style.transform = 'none';
-  }, d);
-});
-
-setTimeout(() => {
-  document.getElementById('ll').classList.add('open');
-  document.getElementById('lr').classList.add('open');
-}, 2000);
-
-/* ─── 2. LETTER-BY-LETTER NAME REVEAL ─── */
-function typeLetters(elId, text, baseDelay, gap) {
+/* ─── 2. NAMES ─── */
+function typeLetters(elId, text, baseDelay) {
   const el = document.getElementById(elId);
   text.split('').forEach((ch, i) => {
     const s = document.createElement('span');
-    s.className = 'name-letter';
     s.textContent = ch === ' ' ? '\u00A0' : ch;
+    s.style.opacity = '0';
+    s.style.display = 'inline-block';
     el.appendChild(s);
-    setTimeout(() => {
-      s.style.transition = 'opacity 0.35s ease, transform 0.45s cubic-bezier(0.34,1.56,0.64,1)';
-      s.style.opacity = '1';
-      s.style.transform = 'translateY(0)';
-    }, baseDelay + i * gap);
+    setTimeout(() => { s.style.opacity = '1'; }, baseDelay + i * 80);
   });
 }
-typeLetters('name1', 'Ashwin',    1150, 80);
-typeLetters('name2', 'Vathchala', 1380, 70);
+typeLetters('name1', 'Ashwin', 1100);
+typeLetters('name2', 'Vathchala', 1400);
 
-/* ─── 3. COUNTDOWN LOGIC ─── */
+/* ─── 3. COUNTDOWN ─── */
 const weddingDate = new Date("July 12, 2026 10:30:00").getTime();
-
-function updateCountdown() {
+setInterval(() => {
     const now = new Date().getTime();
-    const distance = weddingDate - now;
+    const dist = weddingDate - now;
+    document.getElementById("days").innerText = Math.floor(dist / 86400000).toString().padStart(2, '0');
+    document.getElementById("hours").innerText = Math.floor((dist % 86400000) / 3600000).toString().padStart(2, '0');
+    document.getElementById("minutes").innerText = Math.floor((dist % 3600000) / 60000).toString().padStart(2, '0');
+    document.getElementById("seconds").innerText = Math.floor((dist % 60000) / 1000).toString().padStart(2, '0');
+}, 1000);
 
-    const d = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const s = Math.floor((distance % (1000 * 60)) / 1000);
-
-    document.getElementById("days").innerText = d.toString().padStart(2, '0');
-    document.getElementById("hours").innerText = h.toString().padStart(2, '0');
-    document.getElementById("minutes").innerText = m.toString().padStart(2, '0');
-    document.getElementById("seconds").innerText = s.toString().padStart(2, '0');
-
-    if (distance < 0) {
-        clearInterval(timerInterval);
-        document.getElementById("countdown").innerHTML = "<div style='color:var(--gold); font-family:Cinzel; font-size:14px; letter-spacing:2px;'>The Celebration Begins!</div>";
-    }
-}
-const timerInterval = setInterval(updateCountdown, 1000);
-updateCountdown();
-
-/* ─── 4. FALLING ROSE PETALS ─── */
+/* ─── 4. PETALS (GREEN LEAVES VERSION) ─── */
 const canvas = document.getElementById('petal-canvas');
-const ctx    = canvas.getContext('2d');
-let W, H;
+const ctx = canvas.getContext('2d');
+let W = canvas.width = window.innerWidth;
+let H = canvas.height = window.innerHeight;
 
-function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
-resize();
-window.addEventListener('resize', resize);
-
-const COLORS = ['#e8b4a0','#d49080','#f0c8b0','#c87060','#f5ddd0','#d4af7a'];
-
+const colors = ['#4a634a', '#2d5a27', '#88a070', '#b8965a'];
 class Petal {
-  constructor(init) {
-    this.x      = Math.random() * (W || 800);
-    this.y      = init ? Math.random() * (H || 600) : -20;
-    this.r      = 5 + Math.random() * 8;
-    this.dx     = (Math.random() - 0.5) * 0.7;
-    this.dy     = 0.55 + Math.random() * 1.1;
-    this.rot    = Math.random() * Math.PI * 2;
-    this.drot   = (Math.random() - 0.5) * 0.04;
-    this.wobble = Math.random() * Math.PI * 2;
-    this.color  = COLORS[Math.floor(Math.random() * COLORS.length)];
-    this.alpha  = 0.5 + Math.random() * 0.4;
-    this.sy     = 0.4 + Math.random() * 0.35;
+  constructor() { this.init(); }
+  init() {
+    this.x = Math.random() * W;
+    this.y = -20;
+    this.r = 3 + Math.random() * 5;
+    this.dy = 1 + Math.random() * 2;
+    this.color = colors[Math.floor(Math.random() * colors.length)];
   }
   update() {
-    this.wobble += 0.03;
-    this.x  += this.dx + Math.sin(this.wobble) * 0.55;
-    this.y  += this.dy;
-    this.rot += this.drot;
-    if (this.y > H + 30) { this.y = -20; this.x = Math.random() * W; }
+    this.y += this.dy;
+    if (this.y > H) this.init();
   }
   draw() {
-    ctx.save();
-    ctx.globalAlpha = this.alpha;
-    ctx.translate(this.x, this.y);
-    ctx.rotate(this.rot);
-    ctx.scale(1, this.sy);
     ctx.beginPath();
-    ctx.ellipse(0, 0, this.r, this.r * 1.65, 0, 0, Math.PI * 2);
+    ctx.ellipse(this.x, this.y, this.r, this.r*1.5, Math.PI/4, 0, Math.PI*2);
     ctx.fillStyle = this.color;
+    ctx.globalAlpha = 0.4;
     ctx.fill();
-    ctx.restore();
   }
 }
-
-const petals = Array.from({ length: 40 }, () => new Petal(true));
-(function loop() { ctx.clearRect(0,0,W,H); petals.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(loop); })();
+const petals = Array.from({length: 30}, () => new Petal());
+function loop() {
+  ctx.clearRect(0,0,W,H);
+  petals.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(loop);
+}
+loop();
 </script>
 </body>
 </html>
