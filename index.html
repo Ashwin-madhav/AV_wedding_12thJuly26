@@ -282,6 +282,51 @@
     display: block; margin-top: 2px;
   }
 
+  /* Location Button */
+  .btn-container { margin-top: 15px; }
+  .location-btn {
+    display: inline-block;
+    border: 1px solid var(--gold);
+    padding: 10px 24px;
+    font-size: 10px;
+    font-family: 'Cinzel', serif;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-decoration: none;
+    transition: all 0.5s ease;
+  }
+  .location-btn:hover {
+    background: var(--gold);
+    color: var(--deep);
+  }
+
+  /* COUNTDOWN STYLES */
+  #countdown {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    border-top: 1px solid rgba(184, 150, 90, 0.1);
+    padding-top: 30px;
+  }
+  .countdown-box span {
+    font-family: 'EB Garamond', serif;
+    font-size: 32px;
+    color: var(--gold-pale);
+    display: block;
+    line-height: 1;
+  }
+  .countdown-box p {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    text-transform: uppercase;
+    tracking-widest: 0.2em;
+    color: var(--gold);
+    margin-top: 8px;
+    opacity: 0.8;
+  }
+
   /* RSVP */
   .rsvp-section { padding: 28px 0 10px; }
   .rsvp-label {
@@ -336,36 +381,11 @@
     <div class="shimmer-overlay"></div>
 
     <!-- Corners -->
-    <div class="corner corner-tl">
-      <svg viewBox="0 0 50 50" fill="none">
-        <path class="corner-path" d="M2 2 L2 20 M2 2 L20 2" stroke="#b8965a" stroke-width="1.5"/>
-        <path class="corner-curve" d="M2 2 Q 15 8, 25 25" stroke="#b8965a" stroke-width="0.5" opacity="0.4"/>
-        <circle class="corner-dot" cx="2" cy="2" r="2" fill="#b8965a"/>
-      </svg>
-    </div>
-    <div class="corner corner-tr">
-      <svg viewBox="0 0 50 50" fill="none">
-        <path class="corner-path" d="M2 2 L2 20 M2 2 L20 2" stroke="#b8965a" stroke-width="1.5"/>
-        <path class="corner-curve" d="M2 2 Q 15 8, 25 25" stroke="#b8965a" stroke-width="0.5" opacity="0.4"/>
-        <circle class="corner-dot" cx="2" cy="2" r="2" fill="#b8965a"/>
-      </svg>
-    </div>
-    <div class="corner corner-bl">
-      <svg viewBox="0 0 50 50" fill="none">
-        <path class="corner-path" d="M2 2 L2 20 M2 2 L20 2" stroke="#b8965a" stroke-width="1.5"/>
-        <path class="corner-curve" d="M2 2 Q 15 8, 25 25" stroke="#b8965a" stroke-width="0.5" opacity="0.4"/>
-        <circle class="corner-dot" cx="2" cy="2" r="2" fill="#b8965a"/>
-      </svg>
-    </div>
-    <div class="corner corner-br">
-      <svg viewBox="0 0 50 50" fill="none">
-        <path class="corner-path" d="M2 2 L2 20 M2 2 L20 2" stroke="#b8965a" stroke-width="1.5"/>
-        <path class="corner-curve" d="M2 2 Q 15 8, 25 25" stroke="#b8965a" stroke-width="0.5" opacity="0.4"/>
-        <circle class="corner-dot" cx="2" cy="2" r="2" fill="#b8965a"/>
-      </svg>
-    </div>
+    <div class="corner corner-tl"><svg viewBox="0 0 50 50" fill="none"><path class="corner-path" d="M2 2 L2 20 M2 2 L20 2" stroke="#b8965a" stroke-width="1.5"/><path class="corner-curve" d="M2 2 Q 15 8, 25 25" stroke="#b8965a" stroke-width="0.5" opacity="0.4"/><circle class="corner-dot" cx="2" cy="2" r="2" fill="#b8965a"/></svg></div>
+    <div class="corner corner-tr"><svg viewBox="0 0 50 50" fill="none"><path class="corner-path" d="M2 2 L2 20 M2 2 L20 2" stroke="#b8965a" stroke-width="1.5"/><path class="corner-curve" d="M2 2 Q 15 8, 25 25" stroke="#b8965a" stroke-width="0.5" opacity="0.4"/><circle class="corner-dot" cx="2" cy="2" r="2" fill="#b8965a"/></svg></div>
+    <div class="corner corner-bl"><svg viewBox="0 0 50 50" fill="none"><path class="corner-path" d="M2 2 L2 20 M2 2 L20 2" stroke="#b8965a" stroke-width="1.5"/><path class="corner-curve" d="M2 2 Q 15 8, 25 25" stroke="#b8965a" stroke-width="0.5" opacity="0.4"/><circle class="corner-dot" cx="2" cy="2" r="2" fill="#b8965a"/></svg></div>
+    <div class="corner corner-br"><svg viewBox="0 0 50 50" fill="none"><path class="corner-path" d="M2 2 L2 20 M2 2 L20 2" stroke="#b8965a" stroke-width="1.5"/><path class="corner-curve" d="M2 2 Q 15 8, 25 25" stroke="#b8965a" stroke-width="0.5" opacity="0.4"/><circle class="corner-dot" cx="2" cy="2" r="2" fill="#b8965a"/></svg></div>
 
-    <!-- Top banner -->
     <div class="top-banner">
       <div class="mandala-ring">
         <svg viewBox="0 0 60 60" fill="none">
@@ -394,9 +414,7 @@
       <div class="blessing-text">With the blessings of God &amp; our families</div>
     </div>
 
-    <!-- Main content -->
     <div class="main-content">
-
       <div class="divider anim" style="margin-top:28px;" data-delay="600">
         <div class="divider-line"></div>
         <div class="divider-ornament">✦</div>
@@ -416,13 +434,7 @@
       <div class="lotus-divider anim" data-delay="1800">
         <div class="lotus-line" id="ll"></div>
         <svg class="lotus-svg" width="40" height="36" viewBox="0 0 40 36" fill="none">
-          <ellipse cx="20" cy="22" rx="4" ry="8" fill="#b8965a" opacity="0.7"/>
-          <ellipse cx="20" cy="22" rx="4" ry="8" fill="#b8965a" opacity="0.5" transform="rotate(-35 20 26)"/>
-          <ellipse cx="20" cy="22" rx="4" ry="8" fill="#b8965a" opacity="0.5" transform="rotate(35 20 26)"/>
-          <ellipse cx="20" cy="22" rx="3" ry="6" fill="#b8965a" opacity="0.35" transform="rotate(-65 20 26)"/>
-          <ellipse cx="20" cy="22" rx="3" ry="6" fill="#b8965a" opacity="0.35" transform="rotate(65 20 26)"/>
-          <path d="M6 30 Q20 26 34 30" stroke="#b8965a" stroke-width="1" opacity="0.4" fill="none"/>
-          <path d="M10 32 Q20 29 30 32" stroke="#b8965a" stroke-width="0.6" opacity="0.25" fill="none"/>
+          <ellipse cx="20" cy="22" rx="4" ry="8" fill="#b8965a" opacity="0.7"/><ellipse cx="20" cy="22" rx="4" ry="8" fill="#b8965a" opacity="0.5" transform="rotate(-35 20 26)"/><ellipse cx="20" cy="22" rx="4" ry="8" fill="#b8965a" opacity="0.5" transform="rotate(35 20 26)"/><ellipse cx="20" cy="22" rx="3" ry="6" fill="#b8965a" opacity="0.35" transform="rotate(-65 20 26)"/><ellipse cx="20" cy="22" rx="3" ry="6" fill="#b8965a" opacity="0.35" transform="rotate(65 20 26)"/><path d="M6 30 Q20 26 34 30" stroke="#b8965a" stroke-width="1" opacity="0.4" fill="none"/><path d="M10 32 Q20 29 30 32" stroke="#b8965a" stroke-width="0.6" opacity="0.25" fill="none"/>
         </svg>
         <div class="lotus-line right" id="lr"></div>
       </div>
@@ -456,28 +468,35 @@
               Sri Lakshmi Balaji Thirumana Mandapam
               <small>Madukkarai, Coimbatore</small>
             </div>
+            <div class="btn-container">
+              <a href="https://maps.app.goo.gl/wRWfttmKGqMjPZiU8" target="_blank" class="location-btn">View Location</a>
+            </div>
           </div>
+        </div>
+
+        <!-- Countdown Integrated Here -->
+        <div id="countdown" class="anim" data-delay="2800">
+            <div class="countdown-box"><span id="days">00</span><p>Days</p></div>
+            <div class="countdown-box"><span id="hours">00</span><p>Hours</p></div>
+            <div class="countdown-box"><span id="minutes">00</span><p>Mins</p></div>
+            <div class="countdown-box"><span id="seconds">00</span><p>Secs</p></div>
         </div>
       </div>
 
-      <div class="rsvp-section anim" data-delay="2800">
+      <div class="rsvp-section anim" data-delay="3000">
         <div class="rsvp-label">RSVP</div>
         <div class="rsvp-contact">+91 90438 91097</div>
         <p class="rsvp-note">We look forward to your gracious presence</p>
       </div>
 
-      <div class="divider anim" style="margin-bottom:8px;" data-delay="3000">
+      <div class="divider anim" style="margin-bottom:8px;" data-delay="3200">
         <div class="divider-line"></div>
         <div class="divider-ornament">✦</div>
         <div class="divider-line"></div>
       </div>
-
     </div>
 
-    <div class="bottom-ornament">
-      <span>· · ✦ · ·</span>
-    </div>
-
+    <div class="bottom-ornament"><span>· · ✦ · ·</span></div>
   </div>
 </div>
 
@@ -501,7 +520,6 @@ document.querySelectorAll('.detail-row').forEach(row => {
   }, d);
 });
 
-/* Lotus lines */
 setTimeout(() => {
   document.getElementById('ll').classList.add('open');
   document.getElementById('lr').classList.add('open');
@@ -525,7 +543,32 @@ function typeLetters(elId, text, baseDelay, gap) {
 typeLetters('name1', 'Ashwin',    1150, 80);
 typeLetters('name2', 'Vathchala', 1380, 70);
 
-/* ─── 3. FALLING ROSE PETALS ─── */
+/* ─── 3. COUNTDOWN LOGIC ─── */
+const weddingDate = new Date("July 12, 2026 10:30:00").getTime();
+
+function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = weddingDate - now;
+
+    const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("days").innerText = d.toString().padStart(2, '0');
+    document.getElementById("hours").innerText = h.toString().padStart(2, '0');
+    document.getElementById("minutes").innerText = m.toString().padStart(2, '0');
+    document.getElementById("seconds").innerText = s.toString().padStart(2, '0');
+
+    if (distance < 0) {
+        clearInterval(timerInterval);
+        document.getElementById("countdown").innerHTML = "<div style='color:var(--gold); font-family:Cinzel; font-size:14px; letter-spacing:2px;'>The Celebration Begins!</div>";
+    }
+}
+const timerInterval = setInterval(updateCountdown, 1000);
+updateCountdown();
+
+/* ─── 4. FALLING ROSE PETALS ─── */
 const canvas = document.getElementById('petal-canvas');
 const ctx    = canvas.getContext('2d');
 let W, H;
@@ -566,10 +609,6 @@ class Petal {
     ctx.beginPath();
     ctx.ellipse(0, 0, this.r, this.r * 1.65, 0, 0, Math.PI * 2);
     ctx.fillStyle = this.color;
-    ctx.fill();
-    ctx.beginPath();
-    ctx.ellipse(-this.r * 0.2, -this.r * 0.3, this.r * 0.35, this.r * 0.55, -0.4, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(255,255,255,0.28)';
     ctx.fill();
     ctx.restore();
   }
